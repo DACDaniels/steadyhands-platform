@@ -17,9 +17,7 @@ type MenuCategory = {
 }
 
 async function getMenu(): Promise<MenuCategory[]> {
-  const res = await fetch("/api/menu", {
-    cache: "no-store",
-  })
+  const res = await fetch("https://steadyhands-platform-s8xy.vercel.app/api/menu")
 
   if (!res.ok) {
     console.log("status", res.status)
