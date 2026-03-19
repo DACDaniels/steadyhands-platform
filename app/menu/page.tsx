@@ -29,6 +29,8 @@ async function getMenu(): Promise<MenuCategory[]> {
   return res.json()
 }
 
+export const dynamic = "force-dynamic"
+
 export default async function MenuPage() {
   const menu = await getMenu()
 
