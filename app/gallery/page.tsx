@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -16,15 +16,15 @@ export default function GalleryPage() {
 
   const [index, setIndex] = useState<number | null>(null)
 
-  const next = () => {
+  const next = useCallback(() => {
     if (index === null) return
     setIndex((prev) => (prev! + 1) % images.length)
-  }
+  }, [index, images.length])
 
-  const prev = () => {
+  const prev = useCallback(() => {
     if (index === null) return
     setIndex((prev) => (prev! - 1 + images.length) % images.length)
-  }
+  }, [index, images.length])
 
   // Keyboard controls
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function GalleryPage() {
 
     window.addEventListener("keydown", handleKey)
     return () => window.removeEventListener("keydown", handleKey)
-  }, [index])
+  }, [index, next, prev])
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white overflow-hidden">
@@ -76,7 +76,6 @@ export default function GalleryPage() {
               onClick={() => setIndex(i)}
               className="relative group rounded-2xl overflow-hidden cursor-pointer"
             >
-
               <div className="relative w-full h-52 md:h-72">
                 <Image
                   src={src}
@@ -88,12 +87,10 @@ export default function GalleryPage() {
 
               {/* overlay */}
               <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition" />
-
             </motion.div>
           ))}
 
         </div>
-
       </div>
 
       {/* MODAL */}
@@ -106,7 +103,7 @@ export default function GalleryPage() {
             exit={{ opacity: 0 }}
           >
 
-            {/* IMAGE CONTAINER */}
+            {/* IMAGE */}
             <motion.div
               key={index}
               className="relative w-full max-w-5xl h-[70vh] cursor-grab active:cursor-grabbing"
@@ -121,17 +118,15 @@ export default function GalleryPage() {
                 if (info.offset.x > 100) prev()
               }}
             >
-
               <Image
                 src={images[index]}
                 alt=""
                 fill
                 className="object-contain rounded-xl"
               />
-
             </motion.div>
 
-            {/* CLOSE AREA */}
+            {/* CLOSE */}
             <div
               className="absolute inset-0"
               onClick={() => setIndex(null)}
