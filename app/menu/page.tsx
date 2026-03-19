@@ -16,17 +16,43 @@ type MenuCategory = {
   items: MenuItem[]
 }
 
+// ✅ TEMP DATA (NO API = NO ERRORS)
 async function getMenu(): Promise<MenuCategory[]> {
-  const res = await fetch("https://steadyhands-platform-s8xy.vercel.app/api/menu")
-
-  if (!res.ok) {
-    console.log("status", res.status)
-    const text = await res.text()
-    console.log("ERROR", text)
-    throw new Error("Failed to fetch menu")
-  }
-
-  return res.json()
+  return [
+    {
+      id: 1,
+      name: "Main Dishes",
+      items: [
+        {
+          id: 1,
+          name: "Grilled Steak",
+          description: "Juicy steak cooked to perfection",
+          price: 25,
+          image: "/images/gallery1.jpg",
+        },
+        {
+          id: 2,
+          name: "Roasted Chicken",
+          description: "Tender chicken with herbs",
+          price: 18,
+          image: "/images/gallery2.jpg",
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: "Sides",
+      items: [
+        {
+          id: 3,
+          name: "French Fries",
+          description: "Crispy golden fries",
+          price: 5,
+          image: "/images/gallery3.jpg",
+        },
+      ],
+    },
+  ]
 }
 
 export const dynamic = "force-dynamic"
@@ -37,7 +63,7 @@ export default async function MenuPage() {
   return (
     <main className="bg-premium text-foreground py-32 px-6 min-h-screen">
 
-      {/* 🔥 TITLE WITH DEPTH */}
+      {/* TITLE */}
       <div className="text-center mb-24">
         <h1 className="text-5xl md:text-6xl font-[family-name:var(--font-heading)] tracking-tight">
           Our Menu
@@ -53,7 +79,7 @@ export default async function MenuPage() {
       {menu.map((category) => (
         <section key={category.id} className="mb-28">
 
-          {/* 🔥 CATEGORY HEADER */}
+          {/* CATEGORY HEADER */}
           <div className="flex items-center gap-4 mb-12">
             <div className="h-[1px] flex-1 bg-border" />
 
@@ -70,16 +96,9 @@ export default async function MenuPage() {
             {category.items.map((item) => (
               <div
                 key={item.id}
-                className="
-                  group relative 
-                  card-premium 
-                  rounded-2xl 
-                  overflow-hidden 
-                  cursor-pointer
-                "
+                className="group relative card-premium rounded-2xl overflow-hidden cursor-pointer"
               >
 
-                {/* IMAGE (🔥 PREMIUM EFFECT ADDED) */}
                 {item.image && (
                   <div className="image-premium h-56 w-full overflow-hidden">
                     <Image
@@ -92,14 +111,11 @@ export default async function MenuPage() {
                   </div>
                 )}
 
-                {/* 🔥 HOVER GLOW */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 
                   bg-[radial-gradient(circle_at_center,rgba(180,30,30,0.15),transparent_70%)]" />
 
-                {/* CONTENT */}
                 <div className="p-6 space-y-4 relative z-10">
 
-                  {/* NAME + PRICE */}
                   <div className="flex justify-between items-center">
                     <span className="font-semibold text-lg tracking-wide">
                       {item.name}
@@ -110,14 +126,12 @@ export default async function MenuPage() {
                     </span>
                   </div>
 
-                  {/* DESCRIPTION */}
                   {item.description && (
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {item.description}
                     </p>
                   )}
 
-                  {/* 🔥 BUTTON UPGRADE */}
                   <div className="pt-3">
                     <AddToCartButton item={item} />
                   </div>
