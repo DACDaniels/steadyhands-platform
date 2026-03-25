@@ -49,6 +49,7 @@ export default function Navbar() {
                 { href: "/order", label: "Order Online" },
                 { href: "/conference-booking", label: "Venue Booking" },
                 { href: "/events", label: "Events" },
+                { href: "/about", label: "About Us" },
               ].map((link) => (
                 <Link
                   key={link.href}
@@ -114,6 +115,7 @@ export default function Navbar() {
             { href: "/order", label: "Order Online" },
             { href: "/conference-booking", label: "Venue Booking" },
             { href: "/events", label: "Events" },
+            { href: "/about", label: "About Us" },
           ].map((link) => (
             <Link
               key={link.href}
