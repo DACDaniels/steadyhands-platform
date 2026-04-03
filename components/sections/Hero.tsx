@@ -9,7 +9,7 @@ export default function Hero() {
 
       {/* BACKGROUND IMAGE */}
       <Image
-        src="/images/hero.jpg"
+        src="/images/hero.webp"
         alt="SteadyHands Restaurant"
         fill
         priority
