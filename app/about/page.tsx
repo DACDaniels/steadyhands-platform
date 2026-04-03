@@ -13,7 +13,7 @@ export default function AboutPage() {
       <section className="relative h-[75vh] flex items-center justify-center text-center">
 
         <Image
-          src="/images/gallery1.jpg"
+          src="/images/gallery1.webp"
           alt=""
           fill
           className="object-cover"
@@ -71,7 +71,7 @@ export default function AboutPage() {
           className="relative h-[260px] md:h-[380px] rounded-xl overflow-hidden"
         >
           <Image
-            src="/images/gallery2.jpg"
+            src="/images/gallery/22."
             alt=""
             fill
             className="object-cover"
@@ -86,12 +86,12 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
 
           {[
-            "/images/gallery1.jpg",
-            "/images/gallery2.jpg",
-            "/images/gallery3.jpg",
-            "/images/gallery4.jpg",
-            "/images/gallery5.jpg",
-            "/images/gallery6.jpg",
+            "/images/gallery/1.webp",
+            "/images/gallery/22.webp",
+            "/images/gallery/3.webp",
+            "/images/gallery/4.webp",
+            "/images/gallery/55.webp",
+            "/images/gallery/6.webp",
           ].map((src, i) => (
             <motion.div
               key={i}

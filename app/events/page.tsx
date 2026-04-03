@@ -10,7 +10,7 @@ export default function EventsPage() {
       <section className="relative h-[50vh] flex items-center justify-center text-center">
 
         <Image
-          src="/images/gallery3.jpg"
+          src="/images/gallery/events.webp"
           alt=""
           fill
           className="object-cover"

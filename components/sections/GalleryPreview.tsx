@@ -21,7 +21,7 @@ export default function GalleryPreview() {
         {/* HERO */}
         <div className="relative w-full h-[260px] md:h-[420px] rounded-2xl overflow-hidden mb-6">
           <Image
-            src="/images/gallery/1.jpg"
+            src="/images/gallery/1.webp"
             alt="Restaurant"
             fill
             className="object-cover"
@@ -33,7 +33,7 @@ export default function GalleryPreview() {
 
           <div className="relative h-[180px] md:h-[240px] rounded-xl overflow-hidden">
             <Image
-              src="/images/gallery/22.jpg"
+              src="/images/gallery/22.webp"
               alt="Food"
               fill
               className="object-cover"
@@ -42,7 +42,7 @@ export default function GalleryPreview() {
 
           <div className="relative h-[180px] md:h-[240px] rounded-xl overflow-hidden">
             <Image
-              src="/images/gallery/3.jpg"
+              src="/images/gallery/3.webp"
               alt="Interior"
               fill
               className="object-cover"
@@ -55,7 +55,7 @@ export default function GalleryPreview() {
         <Link href="/gallery">
           <div className="relative w-full h-[200px] md:h-[260px] rounded-2xl overflow-hidden cursor-pointer">
             <Image
-              src="/images/gallery/4.jpg"
+              src="/images/gallery/4.webp"
               alt="View Gallery"
               fill
               className="object-cover"

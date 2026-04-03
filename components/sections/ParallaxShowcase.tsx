@@ -9,7 +9,7 @@ export default function ParallaxShowcase() {
 
       {/* Background Image */}
       <Image
-        src="/images/restaurant-showcase.jpg"
+        src="/images/restaurant-new.webp"
         alt="Restaurant atmosphere"
         fill
         className="object-cover"

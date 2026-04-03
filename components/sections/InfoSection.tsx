@@ -97,7 +97,7 @@ export default function InfoSection() {
         {/* IMAGE (NEW — CONTROLLED SIZE) */}
         <div className="relative rounded-2xl overflow-hidden">
           <Image
-            src="/images/restaurant-neww.jpg" // replace with your image
+            src="/images/restaurant-neww.webp" // replace with your image
             alt="Dining Experience"
             width={1200}
             height={800}

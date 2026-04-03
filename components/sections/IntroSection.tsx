@@ -12,7 +12,7 @@ export default function IntroSection() {
         {/* LOGO */}
         <div className="mb-8">
           <Image
-            src="/images/signature.jpg"
+            src="/images/signature.webp"
             alt="SteadyHands"
             width={180}
             height={110}
