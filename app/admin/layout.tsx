@@ -1,83 +1,103 @@
 "use client"
 
-import Link from "next/link"
+import { useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { Menu, X } from "lucide-react"
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const [collapsed, setCollapsed] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const nav = [
+    { name: "Dashboard", path: "/admin/menu" },
+    { name: "Add Dish", path: "/admin" }
+  ]
+
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black text-white">
+    <div className="flex min-h-screen">
 
-      {/* Sidebar */}
+      {/* MOBILE BUTTON */}
+      <button
+        onClick={() => setMobileOpen(true)}
+        className="md:hidden fixed top-4 left-4 z-50 bg-yellow-500 text-black p-2 rounded"
+      >
+        <Menu size={18} />
+      </button>
 
-      <aside className="w-64 bg-neutral-900 border-r border-neutral-800 p-6 flex flex-col">
+      {/* SIDEBAR DESKTOP */}
+      <aside
+        className={`
+          hidden md:flex flex-col bg-neutral-900 border-r border-neutral-800 transition-all duration-300
+          ${collapsed ? "w-16" : "w-64"}
+        `}
+      >
+        <div className="flex items-center justify-between p-4">
+          {!collapsed && <span className="font-semibold">Admin</span>}
 
-        <h1 className="text-xl font-semibold mb-10 tracking-wide">
-          SteadyHands Admin
-        </h1>
-
-        <nav className="flex flex-col gap-2">
-
-          <Link
-            href="/admin"
-            className="px-4 py-3 rounded-lg hover:bg-neutral-800 hover:text-yellow-400 transition"
-          >
-            Dashboard
-          </Link>
-
-          <Link
-            href="/admin/menu"
-            className="px-4 py-3 rounded-lg hover:bg-neutral-800 hover:text-yellow-400 transition"
-          >
-            Menu Manager
-          </Link>
-
-          <Link
-            href="/admin/orders"
-            className="px-4 py-3 rounded-lg hover:bg-neutral-800 hover:text-yellow-400 transition"
-          >
-            Orders
-          </Link>
-
-          <Link
-            href="/admin/reservations"
-            className="px-4 py-3 rounded-lg hover:bg-neutral-800 hover:text-yellow-400 transition"
-          >
-            Reservations
-          </Link>
-
-        </nav>
-
-        <div className="mt-auto text-xs text-neutral-500">
-          Restaurant Platform v1
+          <button onClick={() => setCollapsed(!collapsed)}>
+            <Menu size={18} />
+          </button>
         </div>
 
+        <nav className="flex flex-col gap-2 px-2">
+          {nav.map(item => (
+            <button
+              key={item.path}
+              onClick={() => router.push(item.path)}
+              className={`
+                text-left px-3 py-2 rounded-lg text-sm transition
+                ${pathname === item.path
+                  ? "bg-yellow-500 text-black"
+                  : "hover:bg-neutral-800"}
+              `}
+            >
+              {!collapsed ? item.name : item.name[0]}
+            </button>
+          ))}
+        </nav>
       </aside>
 
+      {/* MOBILE SIDEBAR */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 flex">
+          <div className="w-64 bg-neutral-900 p-4">
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="mb-6"
+            >
+              <X />
+            </button>
 
-      {/* Main */}
+            <nav className="space-y-3">
+              {nav.map(item => (
+                <button
+                  key={item.path}
+                  onClick={() => {
+                    router.push(item.path)
+                    setMobileOpen(false)
+                  }}
+                  className="block w-full text-left px-3 py-2 rounded hover:bg-neutral-800"
+                >
+                  {item.name}
+                </button>
+              ))}
+            </nav>
+          </div>
 
-      <div className="flex-1">
+          <div
+            className="flex-1 bg-black/60"
+            onClick={() => setMobileOpen(false)}
+          />
+        </div>
+      )}
 
-        <header className="border-b border-neutral-800 px-10 py-6 flex justify-between items-center">
-
-          <h2 className="text-lg font-semibold tracking-wide">
-            Admin Dashboard
-          </h2>
-
-          <span className="text-sm text-neutral-400">
-            SteadyHands @ Bata Club
-          </span>
-
-        </header>
-
-        <main className="p-10">
-          {children}
-        </main>
-
-      </div>
+      {/* MAIN */}
+      <main className="flex-1 px-4 sm:px-6 py-8 overflow-x-hidden">
+        {children}
+      </main>
 
     </div>
   )

@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* =========================
-   THEME MAPPING (DO NOT TOUCH)
+   THEME MAPPING
 ========================= */
 @theme inline {
   --color-background: var(--background);
@@ -43,7 +43,7 @@
 }
 
 /* =========================
-   LIGHT / DEFAULT THEME
+   LIGHT / DEFAULT THEME (DARK UI BASE)
 ========================= */
 :root {
   --background: oklch(0.12 0.01 25);
@@ -75,13 +75,12 @@
 
   --radius: 0.75rem;
 
-  /* Fonts */
   --font-heading: var(--font-playfair);
   --font-body: var(--font-inter);
 }
 
 /* =========================
-   DARK MODE
+   DARK MODE (optional toggle)
 ========================= */
 .dark {
   --background: oklch(0.08 0.01 25);
@@ -165,28 +164,9 @@
 }
 
 /* =========================
-   PREMIUM INTERACTIONS
+   PREMIUM UI
 ========================= */
 
-/* Hover lift */
-.hover-lift {
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-.hover-lift:hover {
-  transform: translateY(-6px) scale(1.02);
-}
-
-/* Brand glow */
-.glow-red {
-  box-shadow: 0 12px 40px rgba(180, 30, 30, 0.35);
-}
-
-
-/* =========================
-   🔥 PREMIUM FINAL POLISH
-========================= */
-
-/* Background depth (use instead of flat backgrounds) */
 .bg-premium {
   background:
     radial-gradient(circle at 20% 20%, rgba(180,30,30,0.12), transparent 40%),
@@ -194,14 +174,12 @@
     oklch(0.08 0.01 25);
 }
 
-/* Glass effect (for navbar, cards, overlays) */
 .glass {
   background: rgba(20,20,20,0.6);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Premium cards */
 .card-premium {
   background: oklch(0.14 0.015 25);
   border: 1px solid rgba(255,255,255,0.06);
@@ -215,7 +193,6 @@
     0 0 40px rgba(180,30,30,0.15);
 }
 
-/* Image shine effect (IMPORTANT for gallery & menu) */
 .image-premium {
   position: relative;
   overflow: hidden;
@@ -239,7 +216,6 @@
   opacity: 1;
 }
 
-/* Premium buttons */
 .btn-premium {
   position: relative;
   overflow: hidden;
@@ -268,7 +244,28 @@
   transform: scale(1.05);
 }
 
-/* Stronger brand glow */
-.glow-red {
-  box-shadow: 0 12px 40px rgba(180, 30, 30, 0.35);
+/* =========================
+   TYPOGRAPHY (FIXED)
+========================= */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+p, span, a, button {
+  font-family: var(--font-body);
+}
+
+/* ONLY spacing — NO COLOR */
+p {
+  line-height: 1.6;
+}
+
+h1 {
+  line-height: 1.1;
+}
+
+h2 {
+  line-height: 1.2;
 }

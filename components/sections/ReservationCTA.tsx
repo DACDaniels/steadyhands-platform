@@ -1,82 +1,84 @@
 "use client"
 
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
 
 export default function ReservationCTA() {
   return (
-    <section className="relative py-32 overflow-hidden bg-background text-center">
+    <section style={{ backgroundColor: "#1f1f1f" }} className="text-white px-6 py-20">
 
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,30,30,0.15),transparent_70%)] pointer-events-none"></div>
+      <div className="max-w-6xl mx-auto">
 
-      {/* Dark Overlay Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80 pointer-events-none"></div>
+        {/* TOP GRID */}
+        <div className="grid md:grid-cols-2 gap-12 mb-16">
 
-      {/* Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative z-10 max-w-3xl mx-auto px-6"
-      >
+          {/* LEFT */}
+          <div>
+            <p className="text-sm text-neutral-400 mb-2">Call Us</p>
+            <p className="text-lg font-medium mb-4">
+              +263 77 123 4567
+            </p>
 
-        {/* Title */}
-        <h2 className="text-4xl md:text-6xl font-[family-name:var(--font-heading)] mb-6 tracking-tight">
-          Reserve Your Table
-        </h2>
+            <p className="text-sm text-neutral-400 mb-2">Email</p>
+            <p className="text-lg font-medium mb-4">
+              reservations@steadyhands.co.zw
+            </p>
 
-        {/* Subtitle */}
-        <p className="text-muted-foreground mb-10 text-lg leading-relaxed">
-          Experience premium dining and unforgettable evenings at SteadyHands.
-        </p>
+            <p className="text-sm text-neutral-400 mb-2">Reservations</p>
+            <p className="text-lg font-medium">
+              bookings@steadyhands.co.zw
+            </p>
+          </div>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* RIGHT */}
+          <div className="grid grid-cols-2 gap-6 text-sm">
 
-          {/* ✅ BOOK TABLE */}
-          <Button
-            asChild
-            className="
-              bg-primary
-              text-primary-foreground
-              px-10 py-5
-              text-lg
-              rounded-full
-              shadow-[0_10px_40px_rgba(180,30,30,0.35)]
-              hover:bg-primary/90
-              transition-all duration-300
-              hover:scale-105
-            "
-          >
-            <Link href="/order">Book a Table</Link>
-          </Button>
+            <div className="space-y-3">
+              <p className="text-neutral-400">About</p>
+              <p className="text-neutral-400">Events</p>
+              <p className="text-neutral-400">Menu</p>
+              <p className="text-neutral-400">Contact</p>
+            </div>
 
-          {/* ✅ VIEW MENU */}
-          <Button
-            asChild
-            variant="outline"
-            className="
-              px-10 py-5
-              text-lg
-              rounded-full
-              border-white/20
-              text-white
-              backdrop-blur-md
-              hover:bg-white
-              hover:text-black
-              transition-all duration-300
-              hover:scale-105
-            "
-          >
-            <Link href="/menu">View Menu</Link>
-          </Button>
+            <div className="space-y-3">
+              <p className="text-neutral-400">Instagram</p>
+              <p className="text-neutral-400">Facebook</p>
+              <p className="text-neutral-400">Location</p>
+              <p className="text-neutral-400">Bookings</p>
+            </div>
+
+          </div>
 
         </div>
 
-      </motion.div>
+        {/* CTA BLOCK */}
+        <div className="border-t border-neutral-800 pt-10 flex flex-col md:flex-row items-center justify-between gap-6">
+
+          <h3 className="text-xl md:text-2xl font-medium">
+            Reserve your table today
+          </h3>
+
+        <Link href="/booking">
+          <button className="bg-white text-black px-6 py-3 rounded-lg text-sm hover:bg-neutral-200 transition">
+            Book Now
+          </button>
+        </Link>
+
+        </div>
+
+        {/* FOOTER BOTTOM */}
+        <div className="border-t border-neutral-800 mt-10 pt-6 text-sm text-neutral-500 flex flex-col md:flex-row justify-between gap-4">
+
+          <p>© 2026 SteadyHands. All rights reserved.</p>
+
+          <div className="flex gap-4">
+            <p>Terms</p>
+            <p>Privacy</p>
+            <p>Cookies</p>
+          </div>
+
+        </div>
+
+      </div>
 
     </section>
   )

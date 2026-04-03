@@ -1,121 +1,172 @@
 "use client"
 
 import ImageUpload from "@/components/ui/ImageUpload"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
-
-type Category = {
-  id: number
-  name: string
-}
+import Image from "next/image"
 
 export default function AdminPage() {
-
   const router = useRouter()
 
-  const [categories, setCategories] = useState<Category[]>([])
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
-  const [categoryId, setCategoryId] = useState("")
-  const [imageUrl, setImageUrl] = useState("")
-
-  useEffect(() => {
-    fetch("/api/menu", { cache: "no-store" })
-      .then(res => res.json())
-      .then(data => setCategories(data))
-  }, [])
+  const [imageUrl, setImageUrl] = useState<string>("")
+  const [loading, setLoading] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const [message, setMessage] = useState("")
+  const [featured, setFeatured] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const res = await fetch("/api/admin/menu", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name,
-        description,
-        price: Number(price),
-        categoryId: Number(categoryId),
-        image: imageUrl
-      })
-    })
-
-    if (!res.ok) {
-      alert("Error adding dish")
+    if (!name || !price || !imageUrl) {
+      setMessage("Please fill all required fields")
       return
     }
 
-    alert("Dish added!")
+    setLoading(true)
 
-    setName("")
-    setDescription("")
-    setPrice("")
-    setCategoryId("")
-    setImageUrl("")
+    try {
+      const res = await fetch("/api/admin/menu", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          description,
+          price: Number(price),
+          image: imageUrl,
+          featured
+        })
+      })
 
-    router.refresh()   // refreshes menu everywhere
+      if (!res.ok) {
+        setMessage("Error adding dish")
+        setLoading(false)
+        return
+      }
+
+      setMessage("Dish added successfully")
+
+      setName("")
+      setDescription("")
+      setPrice("")
+      setImageUrl("")
+
+      router.refresh()
+
+    } catch (error) {
+      console.error(error)
+      setMessage("Something went wrong")
+    }
+
+    setLoading(false)
   }
 
   return (
-    <main className="min-h-screen bg-black text-white p-10">
+    <main className="min-h-screen bg-black text-white flex justify-center px-3 sm:px-6 py-6">
 
-      <h1 className="text-4xl mb-10">
-        Restaurant Admin
-      </h1>
+      <div className="w-full max-w-md sm:max-w-lg">
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-6 max-w-md"
-      >
+        <h1 className="text-xl sm:text-3xl font-semibold mb-6 text-center">
+          Add New Dish
+        </h1>
 
-        <input
-          placeholder="Dish Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full p-3 bg-neutral-900 rounded"
-        />
+        {message && (
+          <div className="mb-4 p-3 rounded-lg bg-green-500/10 text-green-400 text-sm text-center">
+            {message}
+          </div>
+        )}
 
-        <input
-          placeholder="Dish Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-3 bg-neutral-900 rounded"
-        />
-
-        <input
-          placeholder="Price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          className="w-full p-3 bg-neutral-900 rounded"
-        />
-
-        <ImageUpload onUpload={(url) => setImageUrl(url)} />
-
-        <select
-          value={categoryId}
-          onChange={(e) => setCategoryId(e.target.value)}
-          className="w-full p-3 bg-neutral-900 rounded"
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 bg-neutral-900 p-4 sm:p-6 rounded-2xl shadow-md"
         >
-          <option value="">Select Category</option>
 
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-              {cat.name}
-            </option>
-          ))}
+          {/* NAME */}
+          <input
+            placeholder="Dish Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full max-w-full p-3 text-sm sm:text-base rounded-lg bg-black border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          />
 
-        </select>
+          {/* DESCRIPTION */}
+          <textarea
+            placeholder="Dish Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full max-w-full p-3 text-sm sm:text-base rounded-lg bg-black border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          />
 
-        <button
-          className="w-full bg-yellow-500 text-black py-3 rounded"
-        >
-          Add Dish
-        </button>
+          {/* PRICE */}
+          <input
+            placeholder="Price"
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            className="w-full max-w-full p-3 text-sm sm:text-base rounded-lg bg-black border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          />
 
-      </form>
+          {/* IMAGE UPLOAD */}
+          <div className="space-y-2">
+            <p className="text-sm text-neutral-400">
+              Upload Image
+            </p>
+
+            <div className="w-full max-w-full overflow-hidden rounded-lg border border-neutral-700 bg-black p-2">
+              <ImageUpload
+                onUpload={(url) => {
+                  setImageUrl(url)
+                  setIsUploading(false)
+                }}
+                onUploadStart={() => setIsUploading(true)}
+              />
+            </div>
+          </div>
+
+          {/* PREVIEW */}
+          {imageUrl && (
+            <div className="relative w-full h-40 sm:h-48">
+              <Image
+                src={imageUrl}
+                alt="preview"
+                fill
+                className="object-cover rounded-lg"
+              />
+            </div>
+          )}
+
+          {/* FEATURED TOGGLE */}
+          <div className="flex items-center gap-3 pt-2">
+            <input
+              type="checkbox"
+              checked={featured}
+              onChange={(e) => setFeatured(e.target.checked)}
+              className="w-4 h-4 accent-yellow-500"
+            />
+            <label className="text-sm text-neutral-400">
+              Mark as Featured Dish
+            </label>
+          </div>
+
+          {/* BUTTON */}
+          <button
+            disabled={loading || isUploading || !imageUrl}
+            className="w-full bg-yellow-500 text-black py-3 rounded-lg font-medium hover:bg-yellow-400 transition disabled:opacity-50"
+          >
+            {isUploading
+              ? "Uploading..."
+              : loading
+              ? "Adding..."
+              : "Add Dish"}
+          </button>
+
+        </form>
+
+      </div>
 
     </main>
   )

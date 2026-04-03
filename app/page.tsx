@@ -1,5 +1,7 @@
 import Navbar from "@/components/layout/Navbar"
 import Hero from "@/components/sections/Hero"
+import IntroSection from "@/components/sections/IntroSection"
+import InfoSection from "@/components/sections/InfoSection"
 import FeaturedMenu from "@/components/sections/FeaturedMenu"
 import GalleryPreview from "@/components/sections/GalleryPreview"
 import Experience from "@/components/sections/Experience"
@@ -11,6 +13,8 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
+      <IntroSection />
+      <InfoSection />
       <FeaturedMenu />
       <GalleryPreview />
       <Experience />

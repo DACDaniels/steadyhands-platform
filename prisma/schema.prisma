@@ -3,15 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-model MenuCategory {
-  id          Int        @id @default(autoincrement())
-  name        String
-  description String?
-  items       MenuItem[]
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model MenuItem {
@@ -21,9 +15,7 @@ model MenuItem {
   price       Float
   image       String?
   available   Boolean @default(true)
-
-  categoryId Int
-  category   MenuCategory @relation(fields: [categoryId], references: [id])
+  featured    Boolean @default(false)
 }
 
 model Event {
@@ -43,4 +35,28 @@ model Reservation {
   date      DateTime
   message   String?
   createdAt DateTime @default(now())
+}
+
+model playing_with_neon {
+  id    Int    @id @default(autoincrement())
+  name  String
+  value Float? @db.Real
+}
+
+enum GalleryCategory {
+  FOOD
+  INTERIOR
+  BAR
+  STAFF
+  EVENTS
+  KIDS
+}
+
+model GalleryImage {
+  id        Int             @id @default(autoincrement())
+  url       String
+  category  GalleryCategory
+  featured  Boolean         @default(false)
+  title     String?
+  createdAt DateTime        @default(now())
 }

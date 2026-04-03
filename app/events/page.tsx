@@ -1,48 +1,77 @@
-import Image from "next/image"
+"use client"
 
-const events = [
-  {
-    title: "Jazz Night",
-    image: "/images/gallery1.jpg",
-    date: "March 2026"
-  },
-  {
-    title: "Wine Tasting",
-    image: "/images/gallery2.jpg",
-    date: "February 2026"
-  }
-]
+import Image from "next/image"
 
 export default function EventsPage() {
   return (
-    <main className="bg-black text-white py-32 px-6">
+    <main className="bg-neutral-50 text-neutral-900">
 
-      <h1 className="text-5xl text-center mb-20 font-[family-name:var(--font-heading)]">
-        Events
-      </h1>
+      {/* HERO */}
+      <section className="relative h-[50vh] flex items-center justify-center text-center">
 
-      <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <Image
+          src="/images/gallery3.jpg"
+          alt=""
+          fill
+          className="object-cover"
+        />
 
-        {events.map((event, i) => (
-          <div key={i} className="bg-neutral-900 rounded-xl overflow-hidden">
+        <div className="absolute inset-0 bg-black/30" />
 
-            <Image
-              src={event.image}
-              alt={event.title}
-              width={400}
-              height={300}
-              className="w-full h-60 object-cover"
-            />
+        <div className="relative z-10 px-6">
+          <h1 className="text-3xl md:text-5xl font-semibold text-white">
+            Events
+          </h1>
+        </div>
 
-            <div className="p-6">
-              <h3 className="text-xl mb-2">{event.title}</h3>
-              <p className="text-gray-400">{event.date}</p>
-            </div>
+      </section>
 
+      {/* INTRO */}
+      <section className="py-16 px-6 text-center max-w-2xl mx-auto">
+        <p className="text-neutral-600">
+          Curated nights and experiences designed to elevate your evenings.
+        </p>
+      </section>
+
+      {/* EVENTS LIST */}
+      <section className="px-6 pb-20 max-w-5xl mx-auto space-y-6">
+
+        {[
+          {
+            day: "Saturday",
+            title: "Live Jazz Night",
+            desc: "An evening of live music and atmosphere.",
+          },
+          {
+            day: "Friday",
+            title: "Wine Tasting",
+            desc: "Explore curated selections and pairings.",
+          },
+          {
+            day: "Sunday",
+            title: "Chef’s Special Dinner",
+            desc: "A refined multi-course dining experience.",
+          },
+        ].map((event, i) => (
+          <div
+            key={i}
+            className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200"
+          >
+            <p className="text-xs text-neutral-400 mb-1 uppercase tracking-wide">
+              {event.day}
+            </p>
+
+            <h3 className="text-lg font-semibold mb-2">
+              {event.title}
+            </h3>
+
+            <p className="text-neutral-600 text-sm">
+              {event.desc}
+            </p>
           </div>
         ))}
 
-      </div>
+      </section>
 
     </main>
   )

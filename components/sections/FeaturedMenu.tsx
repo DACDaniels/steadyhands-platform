@@ -1,98 +1,123 @@
 "use client"
 
-import { motion } from "framer-motion"
-import DishCard from "@/components/ui/DishCard"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
 
-const items = [
-  {
-    title: "Grilled Steak",
-    image: "/images/steak.jpg",
-  },
-  {
-    title: "Signature Pasta",
-    image: "/images/pasta.jpg",
-  },
-  {
-    title: "Seafood Special",
-    image: "/images/seafood.jpg",
-  },
-]
+type MenuItem = {
+  id: number
+  name: string
+  description?: string
+  image?: string
+}
 
 export default function FeaturedMenu() {
+
+  const [featured, setFeatured] = useState<MenuItem[]>([])
+
+  useEffect(() => {
+    const loadFeatured = async () => {
+      try {
+        const res = await fetch("/api/menu/featured")
+
+        if (!res.ok) throw new Error("Failed to fetch featured")
+
+        const data = await res.json()
+        setFeatured(data)
+
+      } catch (err) {
+        console.error("Featured fallback:", err)
+        setFeatured([]) // prevents crash
+      }
+    }
+
+    loadFeatured()
+  }, [])
+
   return (
-    <section className="relative py-36 px-6 bg-premium overflow-hidden">
+    <section className="bg-[#eae8e1] py-24 px-6">
 
-      {/* Ambient Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,30,30,0.10),transparent_70%)]" />
+      <div className="max-w-6xl mx-auto">
 
-      <div className="relative max-w-7xl mx-auto">
-
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-24"
-        >
-          <h2 className="font-[family-name:var(--font-heading)] text-5xl md:text-6xl tracking-tight">
+        {/* HEADER */}
+        <div className="text-center mb-20">
+          <h2 className="text-3xl md:text-4xl font-light tracking-wide text-black">
             Featured Dishes
           </h2>
+          <div className="mt-4 h-[1px] w-12 bg-black/40 mx-auto" />
+        </div>
 
-          <p className="text-muted-foreground mt-6 max-w-xl mx-auto text-lg">
-            A curated selection of our finest culinary experiences.
-          </p>
+        {/* ITEMS */}
+        <div className="space-y-24">
 
-          {/* Divider */}
-          <div className="flex justify-center mt-6">
-            <div className="h-[2px] w-16 bg-primary/60"></div>
-          </div>
-        </motion.div>
+          {featured.length === 0 ? (
 
-        {/* Cards */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ staggerChildren: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-12"
-        >
-          {items.map((item, i) => (
-            <motion.div
-              key={i}
-              variants={{
-                hidden: { opacity: 0, y: 80 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.6 }}
-            >
-              <DishCard title={item.title} image={item.image} />
-            </motion.div>
-          ))}
-        </motion.div>
+            <p className="text-center text-neutral-400">
+              Our featured dishes will be available shortly.
+            </p>
+
+          ) : (
+
+            featured.map((item, index) => (
+              <div
+                key={item.id}
+                className={`flex flex-col md:flex-row items-center gap-10 ${
+                  index % 2 !== 0 ? "md:flex-row-reverse" : ""
+                }`}
+              >
+
+                {/* IMAGE */}
+                <div className="w-full md:w-1/2">
+                  <div className="relative w-full h-[260px] md:h-[340px] rounded-xl overflow-hidden">
+
+                    <Image
+                      src={item.image || ""}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                    />
+
+                    {/* GRADIENT OVERLAY */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                    {/* TITLE */}
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-white text-lg md:text-xl font-semibold tracking-wide">
+                        {item.name}
+                      </h3>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* KEEP THE REST OF YOUR CODE EXACTLY SAME */}
+
+              </div>
+            ))
+
+          )}
+
+        </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          viewport={{ once: true }}
-          className="flex justify-center mt-20"
-        >
-          <Button
-            className="
-              bg-primary text-white
-              px-10 py-6 text-lg rounded-full
-              shadow-[0_10px_40px_rgba(180,30,30,0.35)]
-              hover:scale-105 transition-all duration-300
-            "
-          >
-            View Full Menu
-          </Button>
-        </motion.div>
+        <div className="text-center mt-20 flex flex-col sm:flex-row gap-4 justify-center">
+
+          <Link href="/menu">
+            <button className="px-8 py-4 rounded-full bg-black text-white hover:bg-neutral-800 transition">
+              View Menu
+            </button>
+          </Link>
+
+          <Link href="/booking">
+            <button className="px-8 py-4 rounded-full border border-black text-black hover:bg-black hover:text-white transition">
+              Book Table
+            </button>
+          </Link>
+
+        </div>
 
       </div>
+
     </section>
   )
 }

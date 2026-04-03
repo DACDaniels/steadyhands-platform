@@ -2,15 +2,15 @@ import { prisma } from "@/lib/db"
 import { NextResponse } from "next/server"
 
 export async function GET() {
+  try {
+    const items = await prisma.menuItem.findMany()
+    return NextResponse.json(items)
+  } catch (error) {
+    console.error("REAL ERROR:", error)
 
-  const categories = await prisma.menuCategory.findMany({
-    include: {
-      items: true
-    },
-    orderBy: {
-      id: "asc"
-    }
-  })
-
-  return NextResponse.json(categories)
+    return NextResponse.json(
+      { error: String(error) },
+      { status: 500 }
+    )
+  }
 }

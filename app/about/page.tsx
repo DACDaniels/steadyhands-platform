@@ -7,75 +7,68 @@ import { Button } from "@/components/ui/button"
 
 export default function AboutPage() {
   return (
-    <main className="bg-background text-foreground overflow-hidden">
+    <main className="bg-neutral-50 text-neutral-900">
 
       {/* ================= HERO ================= */}
-      <section className="relative h-[80vh] flex items-center justify-center text-center">
+      <section className="relative h-[75vh] flex items-center justify-center text-center">
 
-        {/* Background */}
         <Image
           src="/images/gallery1.jpg"
           alt=""
           fill
-          className="object-cover scale-105"
+          className="object-cover"
         />
 
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/80" />
+        {/* soft gradient for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-transparent" />
 
-        {/* Red glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,30,30,0.25),transparent_70%)]" />
-
-        {/* Content */}
         <motion.div
-          initial={{ opacity: 0, y: 60 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="relative z-10 px-6 max-w-3xl"
+          transition={{ duration: 0.8 }}
+          className="relative z-10 px-6 max-w-2xl"
         >
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-[family-name:var(--font-heading)] tracking-tight">
+          <h1 className="text-4xl md:text-6xl font-semibold text-white">
             SteadyHands
           </h1>
 
-          <p className="mt-6 text-white/70 text-lg leading-relaxed">
-            A refined dining experience crafted for those who appreciate
-            excellence, atmosphere, and unforgettable moments.
+          <p className="mt-4 text-white/80 text-base md:text-lg leading-relaxed">
+            A refined dining experience built around atmosphere, precision,
+            and unforgettable moments.
           </p>
         </motion.div>
 
       </section>
 
       {/* ================= STORY ================= */}
-      <section className="py-28 px-6 max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <section className="py-20 px-6 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
-        {/* Text */}
         <motion.div
-          initial={{ opacity: 0, x: -60 }}
+          initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-4">
             Our Story
           </h2>
 
-          <p className="text-muted-foreground leading-relaxed mb-4">
-            SteadyHands is more than a restaurant — it is an experience.
-            Built on passion, precision, and creativity, every detail is
-            designed to deliver a sense of luxury and comfort.
+          <p className="text-neutral-600 leading-relaxed mb-3">
+            SteadyHands was created to bring together refined dining and
+            intentional atmosphere — a place where every detail contributes
+            to the experience.
           </p>
 
-          <p className="text-muted-foreground leading-relaxed">
-            From carefully curated menus to immersive ambiance, we aim to
-            create moments that stay with you long after you leave.
+          <p className="text-neutral-600 leading-relaxed">
+            From curated menus to the energy of the space, everything is
+            designed to feel seamless, elegant, and memorable.
           </p>
         </motion.div>
 
-        {/* Image */}
         <motion.div
-          initial={{ opacity: 0, x: 60 }}
+          initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="relative h-[400px] rounded-2xl overflow-hidden"
+          className="relative h-[260px] md:h-[380px] rounded-xl overflow-hidden"
         >
           <Image
             src="/images/gallery2.jpg"
@@ -87,10 +80,10 @@ export default function AboutPage() {
 
       </section>
 
-      {/* ================= LUXURY GRID ================= */}
-      <section className="px-6 pb-28">
+      {/* ================= IMAGE GRID ================= */}
+      <section className="px-6 pb-20">
 
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
 
           {[
             "/images/gallery1.jpg",
@@ -102,21 +95,20 @@ export default function AboutPage() {
           ].map((src, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 60 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-              className="relative h-40 md:h-64 rounded-xl overflow-hidden group"
+              whileHover={{ scale: 1.03 }}
+              className="relative h-32 md:h-56 rounded-lg overflow-hidden"
             >
               <Image
                 src={src}
                 alt=""
                 fill
-                className="object-cover transition duration-700 group-hover:scale-110"
+                className="object-cover"
               />
 
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition" />
+              <div className="absolute inset-0 bg-black/10" />
             </motion.div>
           ))}
 
@@ -125,36 +117,36 @@ export default function AboutPage() {
       </section>
 
       {/* ================= EXPERIENCE ================= */}
-      <section className="py-28 px-6 text-center max-w-4xl mx-auto">
+      <section className="py-20 px-6 text-center max-w-3xl mx-auto">
 
         <motion.h2
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-4xl font-semibold mb-6"
+          className="text-3xl md:text-4xl font-semibold mb-4"
         >
           The Experience
         </motion.h2>
 
-        <p className="text-muted-foreground leading-relaxed">
-          Every visit to SteadyHands is curated — from the atmosphere to the
-          service, from the lighting to the plating. We don’t just serve food,
-          we create an environment where every detail matters.
+        <p className="text-neutral-600 leading-relaxed">
+          Every visit is designed to feel effortless — where atmosphere,
+          service, and presentation come together in a way that feels
+          natural, refined, and complete.
         </p>
 
       </section>
 
       {/* ================= CTA ================= */}
-      <section className="py-24 text-center">
+      <section className="pb-20 text-center px-6">
 
-        <Link href="/order">
+        <Link href="/booking">
           <Button className="
-            bg-primary text-white 
-            px-10 py-5 
-            text-lg 
-            rounded-full 
-            shadow-[0_10px_40px_rgba(180,30,30,0.35)]
-            hover:scale-105 
-            transition-all duration-300
+            bg-primary text-white
+            w-full sm:w-auto
+            px-8 py-3
+            rounded-lg
+            text-sm
+            hover:opacity-90
+            transition
           ">
             Book a Table
           </Button>

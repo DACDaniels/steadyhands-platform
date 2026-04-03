@@ -15,9 +15,10 @@ export async function PUT(
         id: Number(id)
       },
       data: {
-        name: body.name,
-        description: body.description,
-        price: body.price
+        ...(body.name !== undefined && { name: body.name }),
+        ...(body.description !== undefined && { description: body.description }),
+        ...(body.price !== undefined && { price: body.price }),
+        ...(body.featured !== undefined && { featured: body.featured }),
       }
     })
 

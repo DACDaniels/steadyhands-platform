@@ -1,17 +1,18 @@
 import type { Metadata } from "next"
-import { Playfair_Display, Inter } from "next/font/google"
+import { Cormorant_Garamond, Sora } from "next/font/google"
 import "./globals.css"
 import PageTransition from "@/components/providers/PageTransition"
 
-const playfair = Playfair_Display({
+const headingFont = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-playfair",
+  variable: "--font-heading",
 })
 
-const inter = Inter({
+const bodyFont = Sora({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-body",
 })
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${playfair.variable} ${inter.variable} antialiased bg-black text-white`}
+        className={`${headingFont.variable} ${bodyFont.variable} bg-black text-white antialiased font-[family-name:var(--font-body)]`}
       >
         <PageTransition>
           {children}
