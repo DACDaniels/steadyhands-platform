@@ -31,6 +31,9 @@ export default function GalleryPage() {
 
       try {
         data = await res.json()
+
+        console.log("GALLERY DATA:", data) // Debug log
+
       } catch (err) {
         console.error("Invalid gallery JSON", err)
         data = []

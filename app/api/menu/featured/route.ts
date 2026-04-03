@@ -14,7 +14,9 @@ export async function GET() {
     console.error("🔥 FEATURED ERROR:", error)
 
     return NextResponse.json(
-      { error: "Something broke" },
+      { 
+        error: error instanceof Error ? error.message : String(error)
+      },
       { status: 500 }
     )
   }
