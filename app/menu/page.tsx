@@ -1,30 +1,17 @@
 import CartButton from "@/components/ui/CartButton"
 import Image from "next/image"
 import AddToCartButton from "@/components/cart/AddToCartButton"
+import { MenuItem } from "@prisma/client"
 
-type MenuItem = {
-  id: number
-  name: string
-  description?: string
-  price: number
-  image?: string
-}
 
 // FETCH
-async function getMenu(): Promise<MenuItem[]> {
+import { prisma } from "@/lib/db"
+
+async function getMenu() {
   try {
-    const res = await fetch("/api/menu/", {
-      cache: "no-store",
-    })
-
-    if (!res.ok) {
-      console.error("API ERROR:", res.status)
-      return []
-    }
-
-    return res.json()
+    return await prisma.menuItem.findMany()
   } catch (error) {
-    console.error("FETCH FAILED:", error)
+    console.error("DB ERROR:", error)
     return []
   }
 }
@@ -95,7 +82,7 @@ export default async function MenuPage() {
               {/* BUTTON (WE STYLE YOUR EXISTING COMPONENT) */}
               <div className="pt-2">
                 <div className="w-full [&>button]:w-full [&>button]:bg-black [&>button]:text-white [&>button]:rounded-lg [&>button]:py-2.5 [&>button]:text-sm [&>button]:font-medium [&>button]:hover:bg-neutral-800 [&>button]:transition">
-                  <AddToCartButton item={item} />
+                  <AddToCartButton item={item as unknown as { id: number; name: string; price: number }} />
                 </div>
               </div>
 
