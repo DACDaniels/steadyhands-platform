@@ -13,7 +13,7 @@ type MenuItem = {
 // FETCH
 async function getMenu(): Promise<MenuItem[]> {
   try {
-    const res = await fetch("http://localhost:3000/api/menu/items", {
+    const res = await fetch("/api/menu/", {
       cache: "no-store",
     })
 
