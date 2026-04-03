@@ -54,7 +54,7 @@ export default function Navbar() {
             </Link>
 
             {/* DESKTOP NAV */}
-            <nav className="hidden md:flex items-center gap-10 text-sm text-white/80">
+            <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
 
               {[
                 { href: "/menu", label: "Menu" },
@@ -68,7 +68,11 @@ export default function Navbar() {
                   href={link.href}
                   className="relative group transition"
                 >
-                  <span className="group-hover:text-primary transition">
+                  <span
+                    className={`transition ${
+                      (scrolled || mobileOpen) ? "text-neutral-900" : "text-white"
+                    } group-hover:text-primary`}
+                  >
                     {link.label}
                   </span>
 
