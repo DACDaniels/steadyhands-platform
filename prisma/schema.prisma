@@ -16,6 +16,7 @@ model MenuItem {
   image       String?
   available   Boolean @default(true)
   featured    Boolean @default(false)
+  category    String?
 }
 
 model Event {
