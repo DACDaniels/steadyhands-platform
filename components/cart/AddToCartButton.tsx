@@ -1,8 +1,7 @@
 "use client"
 
 import { useCartStore } from "@/lib/cartStore"
-import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 type Item = {
   id: number
@@ -12,46 +11,73 @@ type Item = {
 }
 
 export default function AddToCartButton({ item }: { item: Item }) {
+  const items = useCartStore((state) => state.items)
   const addItem = useCartStore((state) => state.addItem)
-  const [added, setAdded] = useState(false)
+  const increaseQuantity = useCartStore((state) => state.increaseQuantity)
+  const decreaseQuantity = useCartStore((state) => state.decreaseQuantity)
 
-  const handleAdd = () => {
-    addItem({
-      ...item,
-      quantity: 1
-    })
-
-    setAdded(true)
-    setTimeout(() => setAdded(false), 1200)
-  }
+  const cartItem = items.find((i) => i.id === item.id)
+  const quantity = cartItem?.quantity || 0
 
   return (
-    <motion.button
-      onClick={handleAdd}
-      whileTap={{ scale: 0.96 }}
-      whileHover={{ scale: 1.04 }}
-      className="
-        relative overflow-hidden
-        w-full 
-        bg-primary text-primary-foreground 
-        py-3 rounded-xl 
-        font-semibold tracking-wide
-        transition-all duration-300
-        shadow-[0_8px_30px_rgba(180,30,30,0.35)]
-        hover:shadow-[0_14px_50px_rgba(180,30,30,0.6)]
-      "
-    >
+    <div className="w-full">
+      <AnimatePresence mode="wait">
 
-      {/* ✨ Shine animation */}
-      <span className="absolute inset-0 opacity-0 hover:opacity-100 transition duration-500">
-        <span className="absolute inset-0 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.3),transparent)]" />
-      </span>
+        {/* ADD BUTTON */}
+        {quantity === 0 ? (
+          <motion.button
+            key="add"
+            onClick={() => addItem({ ...item, quantity: 1 })}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -5 }}
+            whileTap={{ scale: 0.95 }}
+            className="
+              w-full 
+              bg-black text-white 
+              py-1.5 rounded-md
+              text-xs font-medium tracking-wide
+              transition-all duration-200
+              shadow-md hover:bg-neutral-800
+            "
+          >
+            Add to Cart
+          </motion.button>
+        ) : (
 
-      {/* 🔥 Text with smooth change */}
-      <span className="relative z-10">
-        {added ? "Added ✓" : "Add to Cart"}
-      </span>
+        /* QUANTITY CONTROLS */
+          <motion.div
+            key="counter"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="
+              w-full flex items-center justify-between
+              bg-black text-white
+              rounded-md px-3 py-1.5
+              text-xs font-medium
+              shadow-md
+            "
+          >
+            <button
+              onClick={() => decreaseQuantity(item.id)}
+              className="px-2 text-lg active:scale-90 transition"
+            >
+              −
+            </button>
 
-    </motion.button>
+            <span className="text-sm">{quantity}</span>
+
+            <button
+              onClick={() => increaseQuantity(item.id)}
+              className="px-2 text-lg active:scale-90 transition"
+            >
+              +
+            </button>
+          </motion.div>
+        )}
+
+      </AnimatePresence>
+    </div>
   )
 }

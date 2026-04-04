@@ -20,11 +20,9 @@ export default function FeaturedMenu() {
       try {
         const res = await fetch("/api/menu/featured")
 
-        if (!res.ok) throw new Error("Failed to fetch featured")
-
         const data = await res.json()
-        setFeatured(data)
-
+        
+        setFeatured(Array.isArray(data) ? data : []) // ensure it's an array
       } catch (err) {
         console.error("Featured fallback:", err)
         setFeatured([]) // prevents crash
@@ -70,12 +68,14 @@ export default function FeaturedMenu() {
                 <div className="w-full md:w-1/2">
                   <div className="relative w-full h-[260px] md:h-[340px] rounded-xl overflow-hidden">
 
+                  {item.image && (
                     <Image
-                      src={item.image || ""}
+                      src={item.image}
                       alt={item.name}
                       fill
                       className="object-cover"
                     />
+                  )}
 
                     {/* GRADIENT OVERLAY */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

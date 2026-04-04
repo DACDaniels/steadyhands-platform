@@ -5,19 +5,14 @@ export async function GET() {
   try {
     const items = await prisma.menuItem.findMany({
       where: { featured: true },
-      take: 4
+      take: 4,
     })
 
     return NextResponse.json(items ?? [])
-
   } catch (error) {
     console.error("🔥 FEATURED ERROR:", error)
 
-    return NextResponse.json(
-      { 
-        error: error instanceof Error ? error.message : String(error)
-      },
-      { status: 500 }
-    )
+    // ✅ DO NOT BREAK FRONTEND
+    return NextResponse.json([], { status: 200 })
   }
 }

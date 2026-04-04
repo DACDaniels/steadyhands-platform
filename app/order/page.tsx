@@ -5,99 +5,155 @@ import { motion } from "framer-motion"
 
 export default function OrderPage() {
   const items = useCartStore((state) => state.items)
+  const increaseQuantity = useCartStore((state) => state.increaseQuantity)
+  const decreaseQuantity = useCartStore((state) => state.decreaseQuantity)
   const removeItem = useCartStore((state) => state.removeItem)
-  const clearCart = useCartStore((state) => state.clearCart)
-  const total = useCartStore((state) => state.getTotal())
+
+  const total = items.reduce(
+    (t, i) => t + i.price * i.quantity,
+    0
+  )
 
   return (
-    <div className="min-h-screen bg-background px-6 py-28">
+    <div className="min-h-screen bg-[#eae8e1] text-black">
 
-      <div className="max-w-4xl mx-auto">
-
-        {/* Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl font-[family-name:var(--font-heading)] mb-12"
-        >
+      {/* HEADER */}
+      <div className="px-6 pt-16 pb-6">
+        <h1 className="text-3xl font-light tracking-wide">
           Your Order
-        </motion.h1>
+        </h1>
+        <p className="text-sm text-neutral-500 mt-1">
+          Review your items before checkout
+        </p>
+      </div>
 
-        {/* Empty State */}
+      {/* CONTENT */}
+      <div className="px-6 pb-32 max-w-2xl mx-auto">
+
         {items.length === 0 && (
-          <p className="text-muted-foreground">Your cart is empty.</p>
+          <p className="text-neutral-500 text-center mt-10">
+            Your cart is empty.
+          </p>
         )}
 
-        {/* Items */}
-        <div className="space-y-6">
+        <div className="space-y-4">
+
           {items.map((item) => (
-            <div
+            <motion.div
               key={item.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
               className="
-                flex justify-between items-center 
-                bg-white/5 backdrop-blur-md 
-                border border-white/10 
-                rounded-xl p-5
+                bg-white rounded-xl p-4
+                shadow-sm hover:shadow-md transition
               "
             >
-              <div>
-                <h3 className="text-lg font-medium">{item.name}</h3>
-                <p className="text-muted-foreground">
-                  ${item.price} × {item.quantity}
-                </p>
+
+              {/* TOP ROW */}
+              <div className="flex justify-between items-start">
+
+                <div>
+                  <h3 className="font-medium text-base">
+                    {item.name}
+                  </h3>
+                  <p className="text-xs text-neutral-500 mt-1">
+                    ${item.price.toFixed(2)} each
+                  </p>
+                </div>
+
+                <span className="font-semibold text-sm">
+                  ${(item.price * item.quantity).toFixed(2)}
+                </span>
+
               </div>
 
-              <button
-                onClick={() => removeItem(item.id)}
-                className="
-                  text-sm px-4 py-2 rounded-lg 
-                  bg-white/10 hover:bg-red-600 
-                  transition
-                "
-              >
-                Remove
-              </button>
-            </div>
+              {/* CONTROLS */}
+              <div className="flex items-center gap-3 mt-4">
+
+                <div className="
+                  flex items-center bg-black text-white
+                  rounded-md overflow-hidden
+                ">
+
+                  <button
+                    onClick={() => decreaseQuantity(item.id)}
+                    className="px-3 py-1 active:scale-90 transition"
+                  >
+                    −
+                  </button>
+
+                  <span className="px-3 text-sm">
+                    {item.quantity}
+                  </span>
+
+                  <button
+                    onClick={() => increaseQuantity(item.id)}
+                    className="px-3 py-1 active:scale-90 transition"
+                  >
+                    +
+                  </button>
+
+                </div>
+
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className="text-xs text-red-500 ml-auto"
+                >
+                  Remove
+                </button>
+
+              </div>
+
+            </motion.div>
           ))}
+
         </div>
 
-        {/* Total */}
-        {items.length > 0 && (
-          <div className="mt-12">
+      </div>
 
-            <div className="flex justify-between text-xl mb-6">
-              <span>Total</span>
-              <span className="text-primary font-semibold">
-                ${total}
-              </span>
+      {/* STICKY CHECKOUT BAR */}
+      {items.length > 0 && (
+        <motion.div
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", stiffness: 120 }}
+          className="
+            fixed bottom-0 left-0 w-full
+            bg-white border-t
+            px-6 py-4
+            shadow-[0_-10px_30px_rgba(0,0,0,0.08)]
+          "
+        >
+
+          <div className="max-w-2xl mx-auto flex items-center gap-4">
+
+            <div className="flex-1">
+              <p className="text-xs text-neutral-500">
+                Total
+              </p>
+              <p className="text-lg font-semibold">
+                ${total.toFixed(2)}
+              </p>
             </div>
 
-            {/* Checkout Button */}
             <button
               className="
-                w-full 
-                bg-primary text-white 
-                py-5 rounded-full text-lg
-                shadow-[0_10px_40px_rgba(180,30,30,0.4)]
-                hover:scale-[1.02]
-                transition-all duration-300
+                bg-black text-white
+                px-6 py-3 rounded-full
+                text-sm font-medium
+                shadow-md
+                active:scale-95 transition
               "
             >
-              Proceed to Checkout
-            </button>
-
-            {/* Clear Cart */}
-            <button
-              onClick={clearCart}
-              className="mt-6 text-sm text-muted-foreground hover:text-red-400 transition"
-            >
-              Clear Cart
+              Checkout
             </button>
 
           </div>
-        )}
 
-      </div>
+        </motion.div>
+      )}
+
     </div>
   )
 }
