@@ -13,7 +13,7 @@ export default function AboutPage() {
       <section className="relative h-[75vh] flex items-center justify-center text-center">
 
         <Image
-          src="/images/gallery1.webp"
+          src="/images/restaurant-neww.webp"
           alt=""
           fill
           className="object-cover"
@@ -71,7 +71,7 @@ export default function AboutPage() {
           className="relative h-[260px] md:h-[380px] rounded-xl overflow-hidden"
         >
           <Image
-            src="/images/gallery/22."
+            src="/images/gallery/aboutus.webp"
             alt=""
             fill
             className="object-cover"
@@ -87,10 +87,10 @@ export default function AboutPage() {
 
           {[
             "/images/gallery/1.webp",
-            "/images/gallery/22.webp",
+            "/images/gallery/10.webp",
             "/images/gallery/3.webp",
             "/images/gallery/4.webp",
-            "/images/gallery/55.webp",
+            "/images/gallery/events.webp",
             "/images/gallery/6.webp",
           ].map((src, i) => (
             <motion.div
