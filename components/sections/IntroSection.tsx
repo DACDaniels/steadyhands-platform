@@ -22,7 +22,7 @@ export default function IntroSection() {
 
         {/* TEXT */}
         <p className="text-neutral-600 text-lg leading-relaxed max-w-md mx-auto">
-          SteadyHands is located within Bata Club, offering a refined,
+          SteadyHands is located in Gweru at Bata Club, offering a refined,
           modern dining experience built on atmosphere, precision and
           unforgettable culinary moments.
         </p>

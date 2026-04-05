@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Cormorant_Garamond, Sora } from "next/font/google"
 import "./globals.css"
 import PageTransition from "@/components/providers/PageTransition"
+import WhatsAppButton from "@/components/ui/WhatsAppButton"
 
 const headingFont = Cormorant_Garamond({
   subsets: ["latin"],
@@ -34,6 +35,9 @@ export default function RootLayout({
         <PageTransition>
           {children}
         </PageTransition>
+
+        {/* ✅ FLOATING WHATSAPP BUTTON */}
+        <WhatsAppButton />
       </body>
     </html>
   )

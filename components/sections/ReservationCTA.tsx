@@ -15,7 +15,7 @@ export default function ReservationCTA() {
           <div>
             <p className="text-sm text-neutral-400 mb-2">Call Us</p>
             <p className="text-lg font-medium mb-4">
-              +263 77 123 4567
+              +263 77 939 3010
             </p>
 
             <p className="text-sm text-neutral-400 mb-2">Email</p>
@@ -75,6 +75,10 @@ export default function ReservationCTA() {
             <p>Privacy</p>
             <p>Cookies</p>
           </div>
+
+          <p className="text-[11px] text-neutral-600">
+            Built by Daniel Chadambuka
+          </p>
 
         </div>
 

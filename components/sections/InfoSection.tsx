@@ -48,10 +48,10 @@ export default function InfoSection() {
           <div>
             <div className="flex items-center gap-2 text-xs tracking-wide text-neutral-500 mb-2">
               <Clock size={16} />
-              <span>OPENING TIMES</span>
+              <span>WORKING HOURS</span>
             </div>
             <p className="text-2xl font-medium">
-              06:30 – 22:00
+              0900 – 2100
             </p>
           </div>
 
@@ -62,10 +62,10 @@ export default function InfoSection() {
               <span>CONTACT</span>
             </div>
             <p className="text-2xl font-medium">
-              +263 XX XXX XXXX
+              +263 77 929 3010
             </p>
           </div>
-
+          
           {/* ADDRESS */}
           <div className="sm:col-span-2">
             <div className="flex items-center gap-2 text-xs tracking-wide text-neutral-500 mb-2">
@@ -73,7 +73,7 @@ export default function InfoSection() {
               <span>ADDRESS</span>
             </div>
             <p className="text-neutral-700 leading-relaxed">
-              Bata Club, Bulawayo, Zimbabwe
+              Bata Club, Gweru along Bulawayo Road, Zimbabwe
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export default function InfoSection() {
         {/* IMAGE (NEW — CONTROLLED SIZE) */}
         <div className="relative rounded-2xl overflow-hidden">
           <Image
-            src="/images/restaurant-neww.webp" // replace with your image
+            src="/images/gallery/restaurant-neww.webp"
             alt="Dining Experience"
             width={1200}
             height={800}
