@@ -1,5 +1,6 @@
 import CartButton from "@/components/ui/CartButton"
 import Image from "next/image"
+import Link from "next/link"  
 import AddToCartButton from "@/components/cart/AddToCartButton"
 import MenuTabs from "@/components/menu/MenuTabs"
 import {
@@ -63,6 +64,21 @@ export default async function MenuPage() {
 
   return (
     <main className="bg-[#eae8e1] text-black py-16 md:py-20 px-4 min-h-screen">
+
+      {/* LOGO NAV */}
+      <div className="max-w-6xl mx-auto mb-6 flex items-center justify-center md:justify-start">
+
+        <Link href="/" className="inline-block">
+          <Image
+            src="images/logo4.svg"
+            alt="SteadyHands"
+            width={80}
+            height={80}
+            className="object-contain hover:opacity-80 transition"
+          />
+        </Link>
+
+      </div>
 
       {/* TITLE */}
       <div className="text-center mb-14 md:mb-16">
