@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { HiOutlineX, HiOutlineMenu } from "react-icons/hi"
+import Image from "next/image"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -21,36 +23,31 @@ export default function Navbar() {
     <>
       {/* NAVBAR */}
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-          (scrolled || mobileOpen)
-            ? "bg-white/90 backdrop-blur-md border-b border-neutral-200"
-            : "bg-transparent"
-        }`}
+        className={`fixed top-0 w-full z-50 transition-all duration-500 
+          bg-white/80 backdrop-blur-md border-b border-neutral-200
+        `}
       >
-        <div className="max-w-7xl mx-auto px-8 lg:px-12">
+        <div className="w-full px-4 lg:px-6">
           <div className="flex items-center justify-between h-20">
 
             {/* LOGO */}
-            <Link href="/" className="flex flex-col leading-tight group">
-              <span
-                className={`
-                  font-[family-name:var(--font-heading)] 
-                  text-xl md:text-2xl 
-                  transition-colors duration-300
-                  ${(scrolled || mobileOpen) ? "text-neutral-900" : "text-white"}
-                `}
-              >
-                SteadyHands
-              </span>
-              <span
-                className={`
-                  text-[10px] md:text-xs tracking-[0.35em] uppercase
-                  transition-colors duration-300
-                  ${mobileOpen ? "text-neutral-500" : scrolled ? "text-neutral-500" : "text-primary"}
-                `}
-              >
-                @ Bata Club
-              </span>
+            <Link
+              href="/"
+              onClick={(e) => {
+                if (window.location.pathname === "/") {
+                  e.preventDefault()
+                  window.scrollTo({ top: 0, behavior: "smooth" })
+                }
+              }}
+              className="flex items-center"
+            >
+              <Image
+                src="/images/logo4.svg"
+                alt="SteadyHands Logo"
+                width={300}
+                height={120}
+                className="h-20 md:h-24 object-contain -ml-18"
+              />
             </Link>
 
             {/* DESKTOP NAV */}
@@ -87,7 +84,7 @@ export default function Navbar() {
             </nav>
 
             {/* RIGHT SIDE */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 ml-auto">
 
               {/* BOOK BUTTON */}
               <div className="hidden md:block">
@@ -109,9 +106,19 @@ export default function Navbar() {
               {/* MOBILE TOGGLE */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden text-white text-2xl"
+                className="
+                  md:hidden
+                  w-11 h-11
+                  flex items-center justify-center
+                  rounded-full
+                  bg-white text-neutral-900
+                  border border-neutral-200
+                  shadow-sm
+                  transition-all duration-300
+                  hover:scale-105
+                "
               >
-                ☰
+                {mobileOpen ? <HiOutlineX size={22} /> : <HiOutlineMenu size={22} />}
               </button>
 
             </div>
