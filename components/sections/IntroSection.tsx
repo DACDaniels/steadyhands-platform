@@ -5,35 +5,48 @@ import Link from "next/link"
 
 export default function IntroSection() {
   return (
-    <section className="bg-white text-black py-20 px-6">
+    <section className="
+      bg-[#eae8e1]
+      pt-20
+      pb-32
+      px-6
+    ">
 
-      <div className="max-w-xl mx-auto text-center">
+      <div className="
+        max-w-5xl mx-auto
+        bg-white/80 backdrop-blur-md
+        rounded-2xl
+        px-6 md:px-12
+        py-12 md:py-16
+        shadow-[0_30px_80px_rgba(0,0,0,0.12)]
 
-        {/* LOGO */}
-        <div className="mb-8">
-          <Image
-            src="/images/signature.webp"
-            alt="SteadyHands"
-            width={180}
-            height={110}
-            className="mx-auto"
-          />
-        </div>
+        flex flex-col md:flex-row
+        items-center md:items-start
+        gap-10 md:gap-45
+      ">
 
-        {/* TEXT */}
-        <p className="text-neutral-600 text-lg leading-relaxed max-w-md mx-auto">
+       {/* LEFT — LOGO */}
+      <div className="flex-shrink-0">
+        <Image
+          src="/images/signature.webp"
+          alt="SteadyHands"
+          width={200}
+          height={120}
+          className="mx-auto md:mx-0"
+        />
+      </div>
+
+      {/* RIGHT — TEXT + BUTTONS */}
+      <div className="text-center md:text-left max-w-md">
+
+        <p className="text-neutral-600 text-lg leading-relaxed max-w-md">
           SteadyHands is located in Gweru at Bata Club, offering a refined,
           modern dining experience built on atmosphere, precision and
           unforgettable culinary moments.
         </p>
 
-        {/* DIVIDER */}
-        <div className="mt-8 h-[1px] w-12 bg-neutral-300 mx-auto" />
+        <div className="mt-10 flex flex-col sm:flex-row md:justify-start justify-center gap-4">
 
-        {/* CTA BUTTONS */}
-        <div className="mt-10 flex justify-center gap-4">
-
-          {/* PRIMARY */}
           <Link href="/menu">
             <button className="
               px-8 py-4 rounded-full
@@ -45,7 +58,6 @@ export default function IntroSection() {
             </button>
           </Link>
 
-          {/* SECONDARY */}
           <Link href="/booking">
             <button className="
               px-8 py-4 rounded-full
@@ -58,6 +70,8 @@ export default function IntroSection() {
           </Link>
 
         </div>
+
+      </div>
 
       </div>
 

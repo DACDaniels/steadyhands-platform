@@ -51,17 +51,27 @@ export default function ReservationCTA() {
         </div>
 
         {/* CTA BLOCK */}
-        <div className="border-t border-neutral-800 pt-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="border-t border-neutral-800 pt-10 flex flex-col items-center justify-center gap-6 text-center">
 
           <h3 className="text-xl md:text-2xl font-medium">
             Reserve your table today
           </h3>
 
-        <Link href="/booking">
-          <button className="bg-white text-black px-6 py-3 rounded-lg text-sm hover:bg-neutral-200 transition">
-            Book Now
-          </button>
-        </Link>
+          <Link href="/booking">
+            <button className="bg-white text-black px-6 py-3 rounded-lg text-sm hover:bg-neutral-200 transition">
+              Book Now
+            </button>
+          </Link>
+
+          {/* WHATSAPP SECONDARY */}
+          <a
+            href="https://chat.whatsapp.com/YOUR-LINK"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-400 hover:text-white transition"
+          >
+            Not ready to book? Join our WhatsApp for updates →
+          </a>
 
         </div>
 

@@ -1,6 +1,6 @@
 export default function Experience() {
   return (
-    <section className="bg-neutral-50 text-neutral-900 py-24 px-6">
+    <section className="bg-neutral-100 text-neutral-900 py-24 px-6">
       <div className="max-w-5xl mx-auto text-center">
 
         {/* TITLE */}

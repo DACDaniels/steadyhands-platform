@@ -33,16 +33,15 @@ export default function FeaturedMenu() {
   }, [])
 
   return (
-    <section className="bg-[#eae8e1] py-24 px-6">
+    <section className="bg-[#eae8e1] py-24 px-6 -mt-16 md:-mt-20">
 
       <div className="max-w-6xl mx-auto">
 
         {/* HEADER */}
-        <div className="text-center mb-20">
-          <h2 className="text-3xl md:text-4xl font-light tracking-wide text-black">
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-3xl md:text-4xl font-light tracking-wide text-black mb-6">
             Featured Dishes
           </h2>
-          <div className="mt-4 h-[1px] w-12 bg-black/40 mx-auto" />
         </div>
 
         {/* ITEMS */}

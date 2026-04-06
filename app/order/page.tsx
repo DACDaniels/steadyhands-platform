@@ -15,10 +15,10 @@ export default function OrderPage() {
   )
 
   return (
-    <div className="min-h-screen bg-[#eae8e1] text-black">
+    <div className="min-h-screen bg-[#eae8e1] text-black pt-24">
 
       {/* HEADER */}
-      <div className="px-6 pt-16 pb-6">
+      <div className="px-6 pb-6">
         <h1 className="text-3xl font-light tracking-wide">
           Your Order
         </h1>

@@ -67,8 +67,6 @@ export default function GalleryPage() {
             Gallery
           </h1>
 
-          <div className="mt-4 h-[1px] w-12 bg-black/40 mx-auto" />
-
           <p className="text-neutral-600 mt-6 max-w-xl mx-auto">
             A curated look into our space, atmosphere and culinary experience.
           </p>

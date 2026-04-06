@@ -6,9 +6,14 @@ import { Button } from "@/components/ui/button"
 import { HiOutlineX, HiOutlineMenu } from "react-icons/hi"
 import Image from "next/image"
 
-export default function Navbar() {
+export default function Navbar({ variant = "solid" }: { variant?: "solid" | "transparent" }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const textColor =
+  variant === "transparent" && !scrolled
+    ? "text-white"
+    : "text-neutral-900"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,8 +28,12 @@ export default function Navbar() {
     <>
       {/* NAVBAR */}
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-500 
-          bg-white/80 backdrop-blur-md border-b border-neutral-200
+        className={`fixed top-0 w-full z-50 transition-all duration-500
+          ${
+            variant === "transparent" && !scrolled
+              ? "bg-transparent"
+              : "bg-[#eae8e1]/80 backdrop-blur-xl"
+          }
         `}
       >
         <div className="w-full px-4 lg:px-6">
@@ -58,6 +67,7 @@ export default function Navbar() {
                 { href: "/order", label: "Order Online" },
                 { href: "/venue-booking", label: "Venue Booking" },
                 { href: "/events", label: "Events" },
+                { href: "/conference", label: "Conference" },
                 { href: "/about", label: "About Us" },
               ].map((link) => (
                 <Link
@@ -66,9 +76,7 @@ export default function Navbar() {
                   className="relative group transition"
                 >
                   <span
-                    className={`transition ${
-                      (scrolled || mobileOpen) ? "text-neutral-900" : "text-white"
-                    } group-hover:text-primary`}
+                    className={`${textColor} group-hover:text-primary transition`}
                   >
                     {link.label}
                   </span>
@@ -130,7 +138,7 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       {mobileOpen && (
         <div className="
-          fixed inset-0 z-40
+          fixed inset-0 z-40 
           bg-neutral-100/95 backdrop-blur-md
           flex flex-col items-center justify-center gap-8 text-xl
         ">
@@ -153,14 +161,7 @@ export default function Navbar() {
           ))}
 
           <Link href="/booking" onClick={() => setMobileOpen(false)}>
-            <Button
-              className="
-                bg-primary text-white
-                px-10 py-4 rounded-lg
-                shadow-md
-                hover:scale-105 transition-all duration-300
-              "
-            >
+            <Button className="bg-primary text-white px-10 py-4 rounded-lg">
               Book Table
             </Button>
           </Link>

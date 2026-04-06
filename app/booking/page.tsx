@@ -1,8 +1,9 @@
 export default function BookingPage() {
   return (
-    <main className="min-h-screen bg-neutral-50 px-6 py-24">
+    <main className="min-h-screen bg-[#eae8e1] pt-24 md:pt-28 pb-16 md:pb-20">
 
-      <div className="max-w-3xl mx-auto">
+
+      <div className="w-full max-w-3xl mx-auto px-4">
 
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-neutral-900 mb-6 text-center">
           Book a Table

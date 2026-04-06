@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Sora } from "next/font/google"
 import "./globals.css"
 import PageTransition from "@/components/providers/PageTransition"
 import WhatsAppButton from "@/components/ui/WhatsAppButton"
+import Navbar from "@/components/layout/Navbar"
 
 const headingFont = Cormorant_Garamond({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
         className={`${headingFont.variable} ${bodyFont.variable} bg-black text-white antialiased font-[family-name:var(--font-body)]`}
       >
         <PageTransition>
+          <Navbar />
           {children}
         </PageTransition>
 

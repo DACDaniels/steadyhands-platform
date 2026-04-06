@@ -63,34 +63,31 @@ export default async function MenuPage() {
   const categories = Object.keys(groupedSimpleItems)
 
   return (
-    <main className="bg-[#eae8e1] text-black py-16 md:py-20 px-4 min-h-screen">
-
-      {/* LOGO NAV */}
-      <div className="max-w-6xl mx-auto mb-6 flex items-center justify-center md:justify-start">
-
-        <Link href="/" className="inline-block">
-          <Image
-            src="images/logo4.svg"
-            alt="SteadyHands"
-            width={80}
-            height={80}
-            className="object-contain hover:opacity-80 transition"
-          />
-        </Link>
-
-      </div>
+    <main className="bg-[#eae8e1] text-black pt-24 md:pt-28 py-16 md:py-20 px-4 min-h-screen">
 
       {/* TITLE */}
-      <div className="text-center mb-14 md:mb-16">
-        <h1 className="text-3xl md:text-5xl font-light tracking-wide">
-          Our Menu
-        </h1>
+      <div className="mb-14 md:mb-16">
 
-        <div className="mt-4 h-[1px] w-12 mx-auto bg-black/30" />
+        <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row md:items-center">
 
-        <p className="text-neutral-600 mt-4 max-w-xl mx-auto text-sm md:text-base">
-          Crafted dishes. Premium ingredients. Unforgettable taste.
-        </p>
+          {/* LOGO (LEFT ON DESKTOP) */}
+          
+
+          {/* TITLE CENTER */}
+          <div className="text-center w-full">
+            <h1 className="text-3xl md:text-5xl font-light tracking-wide">
+              Our Menu
+            </h1>
+
+            <div className="mt-4 h-[1px] w-12 mx-auto bg-black/30" />
+
+            <p className="text-neutral-600 mt-4 max-w-xl mx-auto text-sm md:text-base">
+              Crafted dishes. Premium ingredients. Unforgettable taste.
+            </p>
+          </div>
+
+        </div>
+
       </div>
 
       {items.length === 0 && (

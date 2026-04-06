@@ -4,10 +4,10 @@ import Image from "next/image"
 
 export default function EventsPage() {
   return (
-    <main className="bg-neutral-50 text-neutral-900">
+    <main className="pt-20 bg-[#eae8e1] text-neutral-900">
 
       {/* HERO */}
-      <section className="relative h-[50vh] flex items-center justify-center text-center">
+      <section className="relative h-[55vh] md:h-[70vh] flex items-center justify-center text-center">
 
         <Image
           src="/images/gallery/events.webp"

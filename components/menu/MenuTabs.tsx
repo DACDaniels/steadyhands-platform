@@ -46,7 +46,7 @@ export default function MenuTabs({ categories }: { categories: string[] }) {
 
   return (
     <div className="
-      sticky top-0 z-40
+      sticky top-0 z-10
       bg-[#eae8e1]/80 backdrop-blur-xl
       border-b border-neutral-200
       shadow-[0_8px_30px_rgba(0,0,0,0.05)]

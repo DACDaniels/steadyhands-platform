@@ -7,11 +7,10 @@ import { Button } from "@/components/ui/button"
 
 export default function AboutPage() {
   return (
-    <main className="bg-neutral-50 text-neutral-900">
+    <main className="bg-[#eae8e1] text-neutral-900">
 
       {/* ================= HERO ================= */}
-      <section className="relative h-[75vh] flex items-center justify-center text-center">
-
+      <section className="relative h-[55vh] md:h-[75vh] flex items-start justify-center text-center pt-24 md:pt-28">
         <Image
           src="/images/restaurant-neww.webp"
           alt=""
@@ -26,7 +25,7 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 px-6 max-w-2xl"
+          className="relative z-10 px-6 max-w-2xl mt-10 md:mt-16"
         >
           <h1 className="text-4xl md:text-6xl font-semibold text-white">
             SteadyHands
