@@ -20,12 +20,12 @@ export default function ReservationCTA() {
 
             <p className="text-sm text-neutral-400 mb-2">Email</p>
             <p className="text-lg font-medium mb-4">
-              reservations@steadyhands.co.zw
+              info@steadyhands.co.zw
             </p>
 
             <p className="text-sm text-neutral-400 mb-2">Reservations</p>
             <p className="text-lg font-medium">
-              bookings@steadyhands.co.zw
+              info@steadyhands.co.zw
             </p>
           </div>
 
