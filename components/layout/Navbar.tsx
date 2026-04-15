@@ -139,29 +139,31 @@ export default function Navbar({ variant = "solid" }: { variant?: "solid" | "tra
       {mobileOpen && (
         <div className="
           fixed inset-0 z-40 
-          bg-neutral-100/95 backdrop-blur-md
-          flex flex-col items-center justify-center gap-8 text-xl
+          bg-[#eae8e1]
+          flex flex-col items-center justify-center gap-6
         ">
 
-          {[
-            { href: "/menu", label: "Menu" },
-            { href: "/order", label: "Order Online" },
-            { href: "/venue-booking", label: "Venue Booking" },
-            { href: "/events", label: "Events" },
-            { href: "/about", label: "About Us" },
-          ].map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="text-neutral-900 hover:text-primary transition text-2xl"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {/* PRIMARY */}
+          <Link href="/menu" onClick={() => setMobileOpen(false)} className="text-2xl text-neutral-900 font-medium tracking-wide">Menu</Link>
+          <Link href="/order" onClick={() => setMobileOpen(false)} className="text-2xl text-neutral-900 font-medium tracking-wide">Order Online</Link>
 
+          {/* DIVIDER */}
+          <div className="w-10 h-[1px] bg-neutral-300 my-2" />
+
+          {/* SERVICES */}
+          <Link href="/venue-booking" onClick={() => setMobileOpen(false)} className="text-2xl text-neutral-900 font-medium tracking-wide">Venue Booking</Link>
+          <Link href="/conference" onClick={() => setMobileOpen(false)} className="text-2xl text-neutral-900 font-medium tracking-wide">Conference Booking</Link>
+          <Link href="/events" onClick={() => setMobileOpen(false)} className="text-2xl text-neutral-900 font-medium tracking-wide">Events</Link>
+
+          {/* DIVIDER */}
+          <div className="w-10 h-[1px] bg-neutral-300 my-2" />
+
+          {/* ABOUT */}
+          <Link href="/about" onClick={() => setMobileOpen(false)} className="text-2xl text-neutral-900 font-medium tracking-wide">About Us</Link>
+
+          {/* CTA */}
           <Link href="/booking" onClick={() => setMobileOpen(false)}>
-            <Button className="bg-primary text-white px-10 py-4 rounded-lg">
+            <Button className="bg-primary text-white px-10 py-4 rounded-lg mt-4">
               Book Table
             </Button>
           </Link>
